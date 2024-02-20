@@ -1,0 +1,60 @@
+# Learn detailed information about the fields of an extension.yaml file in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml
+
+# Identifier for your extension
+name: firestore-document-changes-tracker
+version: 0.0.1 # Follow semver versioning
+specVersion: v1beta # Version of the Firebase Extensions specification
+
+# Friendly display name for your extension (~3-5 words)
+displayName: Firestore Document Changes Tracker
+
+# Brief description of the task your extension performs (~1 sentence)
+description: >-
+  Creates firestore logs for every change on the collection.
+
+license: Apache-2.0 # https://spdx.org/licenses/
+
+# Public URL for the source code of your extension.
+# TODO:  Replace this with your GitHub repo.
+sourceUrl: https://github.com/ORG_OR_USER/REPO_NAME
+
+# Specify whether a paid-tier billing plan is required to use your extension.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
+billingRequired: true
+
+# In an `apis` field, list any Google APIs (like Cloud Translation, BigQuery, etc.)
+# required for your extension to operate.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#apis-field
+
+# In a `roles` field, list any IAM access roles required for your extension to operate.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#roles-field
+
+# In the `resources` field, list each of your extension's functions, including the trigger for each function.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#resources-field
+resources:
+  - name: trackDocumentChanges
+    type: firebaseextensions.v1beta.function
+    description: >-
+      Firestore-OnWrite-triggered function that keep track of the changes of documents
+    properties:
+      eventTrigger:
+        eventType: providers/cloud.firestore/eventTypes/document.write
+        resource: projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION}/{documentId}
+      runtime: "nodejs16"
+
+# In the `params` field, set up your extension's user-configured parameters.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#params-field
+params:
+  - param: COLLECTION
+    label: Collection path to track changes
+    description: >-
+      Collection path to track changes
+    type: string
+    example: collection/{documentId}/subcollection
+    default: "{document=**}"
+    required: false
