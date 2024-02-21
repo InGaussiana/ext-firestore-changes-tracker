@@ -53,7 +53,7 @@ async function saveRecord(
       operation,
       collection: config.collection,
       document: after.ref.path,
-      date: context.timestamp,
+      date: new Date(context.timestamp),
     };
 
     const author = getChangeAuthor(after.data() ?? {});
