@@ -21,7 +21,7 @@ url: https://github.com/InGaussiana
 
 # Public URL for the source code of your extension.
 # TODO:  Replace this with your GitHub repo.
-sourceUrl: https://github.com/ORG_OR_USER/REPO_NAME
+sourceUrl: https://github.com/InGaussiana/ext-firestore-changes-tracker
 
 # Specify whether a paid-tier billing plan is required to use your extension.
 # Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
