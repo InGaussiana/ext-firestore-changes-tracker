@@ -9,6 +9,11 @@ exports.trackDocumentChanges = functions
   .runWith({ failurePolicy: true })
   .firestore.document(`${config.collection}/{documentId}`)
   .onWrite(async (data, context) => {
+    // If changed document is a history record, abort
+    if (data.after.ref.path.startsWith(`${config.logsCollection}/`)) {
+      return;
+    }
+
     // If creatting document
     if (!data.before.exists) {
       functions.logger.log(`Document CREATED (${data.after.ref.path})`);
