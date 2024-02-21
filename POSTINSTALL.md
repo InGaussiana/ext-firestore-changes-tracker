@@ -1,12 +1,6 @@
 # See it in action
 
-You can test out this extension right away!
-
-Visit the following URL:
-
-# Using the extension
-
-To learn more about HTTP functions, visit the [functions documentation](https://firebase.google.com/docs/functions/http-events).
+Update, create or delete any document and see the log being created saved inside ```${param:LOGS_COLLECTION}```.
 
 # Monitoring
 

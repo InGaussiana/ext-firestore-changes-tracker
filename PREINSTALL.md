@@ -1,6 +1,5 @@
-Use this extension to send a friendly greeting.
+Use this extension to save a log of changes in all the documents on a collection
 
-When triggered by an HTTP request, this extension responds with your specified friendly greeting.
 
 # Billing
 
