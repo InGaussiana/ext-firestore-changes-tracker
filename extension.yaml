@@ -11,9 +11,13 @@ displayName: Firestore Document Changes Tracker
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
-  Creates firestore logs for every change on the collection.
+  Creates firestore logs for every change on a collection.
 
 license: Apache-2.0 # https://spdx.org/licenses/
+
+author:
+  authorName: Gaussiana
+url: https://github.com/InGaussiana
 
 # Public URL for the source code of your extension.
 # TODO:  Replace this with your GitHub repo.
@@ -31,6 +35,9 @@ billingRequired: true
 # In a `roles` field, list any IAM access roles required for your extension to operate.
 # Learn more in the docs:
 # https://firebase.google.com/docs/extensions/reference/extension-yaml#roles-field
+roles:
+  - role: datastore.user
+    reason: Allows the extension to write to Firestore.
 
 # In the `resources` field, list each of your extension's functions, including the trigger for each function.
 # Learn more in the docs:
@@ -57,4 +64,28 @@ params:
     type: string
     example: collection/{documentId}/subcollection
     default: "{document=**}"
+    required: false
+  - param: LOGS_COLLECTION
+    label: Collection path to store changes
+    description: >-
+      Collection path where all the logs will be saved
+    type: string
+    example: collection/{documentId}/subcollection
+    default: logs
+    required: false
+  - param: IGNORE_FIELDS
+    label: Ignore fields
+    description: >-
+      Comma separated fields that won't trigger a new history version (nor will be saved on the version data). Nested fields are supported with parent.child syntax.
+    type: string
+    example: updated_at,created_at
+    default:
+    required: false
+  - param: AUTHOR_FIELD
+    label: Field name with modifier user information
+    description: >-
+      Field where the user that made the last change is store (if present it gets copied to log, else ignored)
+    type: string
+    example: updated_by
+    default: updated_by
     required: false
